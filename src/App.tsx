@@ -1,39 +1,40 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { APITester } from "./APITester";
-import "./index.css";
+import { ModeToggle } from "./components/mode-toggle";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
-
-export function App() {
+export default function App() {
   return (
-    <div className="container mx-auto p-8 text-center relative z-10">
-      <div className="flex justify-center items-center gap-8 mb-8">
-        <img
-          src={logo}
-          alt="Bun Logo"
-          className="h-36 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#646cffaa] scale-120"
-        />
-        <img
-          src={reactLogo}
-          alt="React Logo"
-          className="h-36 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#61dafbaa] [animation:spin_20s_linear_infinite]"
-        />
-      </div>
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      {/* Header */}
+      <header className="border-b px-6 py-4 flex items-center justify-between shadow-sm">
+        <h1 className="text-2xl font-bold tracking-tight">🚀 TypeRush</h1>
+        <ModeToggle />
+      </header>
 
-      <Card className="bg-card/50 backdrop-blur-sm border-muted">
-        <CardContent className="pt-6">
-          <h1 className="text-5xl font-bold my-4 leading-tight">Bun + React</h1>
-          <p>
-            Edit{" "}
-            <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">src/App.tsx</code> and
-            save to test HMR
-          </p>
-          <APITester />
-        </CardContent>
-      </Card>
+      {/* Main Content */}
+      <main className="flex-grow flex items-center justify-center p-6">
+        <div className="w-full max-w-md rounded-2xl border shadow-lg bg-card">
+          <Tabs defaultValue="solo" className="w-full">
+            <TabsList className="w-full">
+              <TabsTrigger value="solo">Solo</TabsTrigger>
+              <TabsTrigger value="friend">Friend</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="solo" className="p-4 w-full text-sm">
+              <p className="text-muted-foreground">Start a solo typing challenge to test your speed and accuracy!</p>
+              <button className="mt-4 w-full bg-primary text-white rounded-lg py-2 hover:bg-primary/90 transition">
+                Start Solo Game
+              </button>
+            </TabsContent>
+
+            <TabsContent value="friend" className="p-4 w-full text-sm">
+              <p className="text-muted-foreground">Invite a friend and race each other in real-time!</p>
+              <button className="mt-4 w-full bg-secondary text-black rounded-lg py-2 hover:bg-secondary/80 transition">
+                Invite Friend
+              </button>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </main>
     </div>
   );
 }
-
-export default App;

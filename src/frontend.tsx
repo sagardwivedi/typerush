@@ -5,14 +5,24 @@
  * It is included in `src/index.html`.
  */
 
+import "@/index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "./App";
+import App from "./App";
+import { ThemeProvider } from "./components/theme-provider";
+import { Toaster } from "./components/ui/sonner";
 
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <App />
+    <ThemeProvider
+      defaultTheme="dark"
+      attribute="class"
+      disableTransitionOnChange
+    >
+      <App />
+      <Toaster />
+    </ThemeProvider>
   </StrictMode>
 );
 
